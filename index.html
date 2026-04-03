@@ -210,35 +210,46 @@ footer { text-align: center; padding: 20px; background: #020617; }
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-emailjs.init("dqCAct1Hz4iTw7CkE"); // Replace with your EmailJS user ID
+  // Initialize EmailJS with your public key
+  emailjs.init("dqCAct1Hz4iTw7CkE"); 
 
-const letsTalkBtn = document.getElementById("letsTalkBtn");
-const contactFormDiv = document.getElementById("contact-form");
-const closeFormBtn = document.getElementById("closeForm");
-const form = document.getElementById("contactMeForm");
+  const letsTalkBtn = document.getElementById("letsTalkBtn");
+  const contactFormDiv = document.getElementById("contact-form");
+  const closeFormBtn = document.getElementById("closeForm");
+  const form = document.getElementById("contactMeForm");
 
-// Open form when button clicked
-letsTalkBtn.addEventListener("click", () => {
-  contactFormDiv.style.display = "flex";
-});
+  // Create a placeholder for inline messages
+  const formMessage = document.createElement("p");
+  formMessage.style.color = "#7c3aed";
+  formMessage.style.textAlign = "center";
+  formMessage.style.marginTop = "10px";
+  form.parentNode.insertBefore(formMessage, form.nextSibling);
 
-// Close form
-closeFormBtn.addEventListener("click", () => {
-  contactFormDiv.style.display = "none";
-});
+  // Open form when button clicked
+  letsTalkBtn.addEventListener("click", () => {
+    contactFormDiv.style.display = "flex";
+    formMessage.innerText = ""; // Clear previous messages
+  });
 
-// Send email on form submit
-form.addEventListener("submit", function(e){
-  e.preventDefault();
-  emailjs.sendForm("service_pdvo0qo","template_7isas9i", this)
-    .then(function(){
-      alert("Message sent successfully!");
-      contactFormDiv.style.display = "none";
-      form.reset();
-    }, function(error){
-      alert("Error sending message: " + error.text);
-    });
-});
+  // Close form
+  closeFormBtn.addEventListener("click", () => {
+    contactFormDiv.style.display = "none";
+    letsTalkBtn.focus();
+    formMessage.innerText = "";
+  });
+
+  // Send email on form submit
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    emailjs.sendForm("service_pdvo0qo","template_7isas9i", this)
+      .then(function(){
+        formMessage.innerText = "Message sent successfully!";
+        contactFormDiv.style.display = "none";
+        form.reset();
+      }, function(error){
+        formMessage.innerText = "Error sending message: " + error.text;
+      });
+  });
 </script>
 
 </body>
