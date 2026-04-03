@@ -18,6 +18,10 @@ nav {
   display: flex;
   justify-content: space-between;
   padding: 20px 50px;
+  position: sticky;
+  top: 0;
+  background: #0b1120;
+  z-index: 1000;
 }
 nav h2 {
   color: #7c3aed;
@@ -36,15 +40,32 @@ nav a {
   align-items: center;
   height: 100vh;
   text-align: center;
+  padding: 0 20px;
 }
 
-.hero span {
-  color: #7c3aed;
+.hero img {
+  width:150px; 
+  height:150px; 
+  border-radius:50%; 
+  object-fit:cover; 
+  border:3px solid #7c3aed;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  margin: 10px 0;
+}
+
+.hero h3 {
+  margin: 5px 0 20px 0;
+  color: #cbd5e1;
+  font-weight: normal;
 }
 
 .hero p {
   max-width: 600px;
   color: #cbd5e1;
+  margin-bottom: 20px;
 }
 
 /* BUTTONS */
@@ -75,6 +96,14 @@ section {
   padding: 20px;
   margin: 10px;
   border-radius: 10px;
+  display: inline-block;
+  min-width: 200px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: #334155;
 }
 
 /* FOOTER */
@@ -102,44 +131,52 @@ footer {
 <!-- HERO -->
 <div class="hero">
 
-  <img src="photo.jpg" alt="Sameera"
-  style="width:150px; height:150px; border-radius:50%; object-fit:cover; border:3px solid #7c3aed;">
+  <img src="photo.jpg" alt="Sameera">
 
   <h1>Hi, I'm <span>Sameera</span></h1>
+  <h3>Sustainability Manager | Energy & Environmental Specialist</h3>
 
   <p>I am a sustainability professional interested in energy, environment, and digital solutions.</p>
 
   <a href="#projects" class="btn btn-primary">View My Work</a>
-
   <a href="https://www.linkedin.com/in/sameera-kankanamge-16baaa93/" target="_blank" class="btn btn-outline">Let's Talk</a>
+  <a href="cv.pdf" class="btn btn-outline">Download CV</a>
 
 </div>
 
 <!-- ABOUT -->
 <section id="about">
   <h2>About Me</h2>
-  <p>I work as a sustainability manager focusing on energy management, renewable energy, and environmental improvements in the apparel industry.</p>
+  <p>
+    I am a Sustainability Manager with experience in energy management, renewable energy implementation, and environmental performance improvement in the apparel industry. I am passionate about driving carbon reduction, improving resource efficiency, and building sustainable business solutions.
+  </p>
 </section>
 
 <!-- SKILLS -->
 <section id="skills">
   <h2>Skills</h2>
-  <div class="card">Energy Management</div>
-  <div class="card">Sustainability</div>
-  <div class="card">Environmental Management</div>
+  <div class="card">Energy Management & Audits</div>
+  <div class="card">Renewable Energy (Solar)</div>
+  <div class="card">GHG Emissions & Carbon Footprint</div>
+  <div class="card">Waste Management & Recycling</div>
+  <div class="card">Sustainability Reporting (HIGG, LINDEX)</div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
   <h2>Projects</h2>
-  <div class="card">Solar Energy Implementation</div>
-  <div class="card">Waste Reduction Program</div>
+  <div class="card">
+    Solar Energy Implementation - Reduced grid electricity consumption and carbon emissions.
+  </div>
+  <div class="card">
+    Waste Reduction Program - Improved recycling rate and minimized landfill waste.
+  </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
-  <p>Email: vnskankanamge@gmail.com</p>
+  <p>Email: <a href="mailto:vnskankanamge@gmail.com" style="color:#7c3aed;">vnskankanamge@gmail.com</a></p>
   <p>
     <a href="https://www.linkedin.com/in/sameera-kankanamge-16baaa93/" target="_blank" style="color:#7c3aed;">LinkedIn Profile</a>
   </p>
@@ -152,4 +189,3 @@ footer {
 
 </body>
 </html>
-  
