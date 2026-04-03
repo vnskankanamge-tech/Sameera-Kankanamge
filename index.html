@@ -11,6 +11,7 @@ body {
   font-family: Arial, sans-serif;
   background: #0b1120;
   color: white;
+  scroll-behavior: smooth; /* Smooth scroll */
 }
 
 /* NAVBAR */
@@ -23,9 +24,7 @@ nav {
   background: #0b1120;
   z-index: 1000;
 }
-nav h2 {
-  color: #7c3aed;
-}
+nav h2 { color: #7c3aed; }
 nav a {
   margin: 0 10px;
   text-decoration: none;
@@ -52,21 +51,9 @@ nav a {
   margin-bottom: 20px;
 }
 
-.hero h1 {
-  margin: 10px 0;
-}
-
-.hero h3 {
-  margin: 5px 0 20px 0;
-  color: #cbd5e1;
-  font-weight: normal;
-}
-
-.hero p {
-  max-width: 600px;
-  color: #cbd5e1;
-  margin-bottom: 20px;
-}
+.hero h1 { margin: 10px 0; }
+.hero h3 { margin: 5px 0 20px 0; color: #cbd5e1; font-weight: normal; }
+.hero p { max-width: 600px; color: #cbd5e1; margin-bottom: 20px; }
 
 /* BUTTONS */
 .btn {
@@ -76,20 +63,27 @@ nav a {
   text-decoration: none;
   display: inline-block;
 }
-.btn-primary {
-  background: linear-gradient(to right, #7c3aed, #9333ea);
-  color: white;
+.btn-primary { background: linear-gradient(to right, #7c3aed, #9333ea); color: white; }
+.btn-outline { border: 1px solid white; color: white; }
+
+/* Scroll-down arrow */
+.scroll-down {
+  display: block;
+  margin: 20px auto 0 auto;
+  font-size: 2rem;
+  color: #7c3aed;
+  text-decoration: none;
+  animation: bounce 2s infinite;
 }
-.btn-outline {
-  border: 1px solid white;
-  color: white;
+
+@keyframes bounce {
+  0%,20%,50%,80%,100% { transform: translateY(0); }
+  40% { transform: translateY(10px); }
+  60% { transform: translateY(5px); }
 }
 
 /* SECTION */
-section {
-  padding: 60px 20px;
-  text-align: center;
-}
+section { padding: 60px 20px; text-align: center; }
 
 .card {
   background: #1e293b;
@@ -101,64 +95,41 @@ section {
   transition: 0.3s;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  background: #334155;
-}
+.card:hover { transform: translateY(-5px); background: #334155; }
 
 /* FOOTER */
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #020617;
+footer { text-align: center; padding: 20px; background: #020617; }
+
+/* CONTACT FORM */
+#contact-form {
+  display:none; 
+  position:fixed; 
+  top:0; left:0; 
+  width:100%; height:100%; 
+  background:rgba(0,0,0,0.9); 
+  justify-content:center; 
+  align-items:center; 
+  z-index:2000;
 }
+#contact-form div {
+  background:#1e293b; 
+  padding:30px; 
+  border-radius:10px; 
+  max-width:400px; 
+  width:90%;
+}
+#contact-form h2 { color:#7c3aed; text-align:center; }
+#contact-form input, #contact-form textarea {
+  width:100%; padding:10px; margin:10px 0; border-radius:5px; border:none;
+}
+#contact-form button {
+  padding:10px 20px; border-radius:5px; border:none; cursor:pointer;
+}
+#contact-form button[type="submit"] { background:#7c3aed; color:white; }
+#contact-form button#closeForm { background:#333; color:white; margin-left:10px; }
 </style>
 </head>
-<!-- Contact Form Modal -->
-<div id="contact-form" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:2000;">
-  <div style="background:#1e293b; padding:30px; border-radius:10px; max-width:400px; width:90%;">
-    <h2 style="color:#7c3aed; text-align:center;">Contact Me</h2>
-    <form id="contactMeForm">
-      <input type="text" name="name" placeholder="Your Name" required style="width:100%; padding:10px; margin:10px 0; border-radius:5px; border:none;">
-      <input type="email" name="email" placeholder="Your Email" required style="width:100%; padding:10px; margin:10px 0; border-radius:5px; border:none;">
-      <textarea name="message" placeholder="Your Message" required style="width:100%; padding:10px; margin:10px 0; border-radius:5px; border:none;"></textarea>
-      <button type="submit" style="padding:10px 20px; background:#7c3aed; color:white; border:none; border-radius:5px; cursor:pointer;">Send</button>
-      <button type="button" id="closeForm" style="padding:10px 20px; margin-left:10px; background:#333; color:white; border:none; border-radius:5px; cursor:pointer;">Cancel</button>
-    </form>
-  </div>
-</div>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-  emailjs.init("YOUR_EMAILJS_USER_ID"); // Replace with your EmailJS user ID
 
-  const letsTalkBtn = document.getElementById("letsTalkBtn");
-  const contactFormDiv = document.getElementById("contact-form");
-  const closeFormBtn = document.getElementById("closeForm");
-  const form = document.getElementById("contactMeForm");
-
-  // Open form when button clicked
-  letsTalkBtn.addEventListener("click", () => {
-    contactFormDiv.style.display = "flex";
-  });
-
-  // Close form
-  closeFormBtn.addEventListener("click", () => {
-    contactFormDiv.style.display = "none";
-  });
-
-  // Send email on form submit
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-    emailjs.sendForm("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID", this)
-      .then(function(){
-        alert("Message sent successfully!");
-        contactFormDiv.style.display = "none";
-        form.reset();
-      }, function(error){
-        alert("Error sending message: " + error.text);
-      });
-  });
-</script>
 <body>
 
 <!-- NAVBAR -->
@@ -175,14 +146,12 @@ footer {
 <!-- HERO -->
 <div class="hero">
   <img src="photo.jpg" alt="Sameera">
-
   <h1>Hi, I'm <span>Sameera</span></h1>
   <h3>Sustainability Manager | Energy & Environmental Specialist</h3>
-
   <p>I am a sustainability professional interested in energy, environment, and digital solutions.</p>
 
   <a href="#projects" class="btn btn-primary">View My Work</a>
- <a href="javascript:void(0)" id="letsTalkBtn" class="btn btn-outline">Let's Talk</a>
+  <a href="javascript:void(0)" id="letsTalkBtn" class="btn btn-outline">Let's Talk</a>
   <a href="cv.pdf" class="btn btn-outline">Download CV</a>
 
   <!-- Scroll Down Button -->
@@ -192,9 +161,7 @@ footer {
 <!-- ABOUT -->
 <section id="about">
   <h2>About Me</h2>
-  <p>
-    I am a Sustainability Manager with experience in energy management, renewable energy implementation, and environmental performance improvement in the apparel industry. I am passionate about driving carbon reduction, improving resource efficiency, and building sustainable business solutions.
-  </p>
+  <p>I am a Sustainability Manager with experience in energy management, renewable energy implementation, and environmental performance improvement in the apparel industry. I am passionate about driving carbon reduction, improving resource efficiency, and building sustainable business solutions.</p>
 </section>
 
 <!-- SKILLS -->
@@ -210,30 +177,69 @@ footer {
 <!-- PROJECTS -->
 <section id="projects">
   <h2>Projects</h2>
-  <div class="card">
-    Solar Energy Implementation - Reduced grid electricity consumption and carbon emissions.
-  </div>
-  <div class="card">
-    Waste Reduction Program - Improved recycling rate and minimized landfill waste.
-  </div>
-   <div class="card">
-    Reduce fresh water Usage - Improved recycling and rain water harvesting.
-  </div>
+  <div class="card">Solar Energy Implementation - Reduced grid electricity consumption and carbon emissions.</div>
+  <div class="card">Waste Reduction Program - Improved recycling rate and minimized landfill waste.</div>
+  <div class="card">Reduce Fresh Water Usage - Improved recycling and rain water harvesting.</div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
   <p>Email: <a href="mailto:vnskankanamge@gmail.com" style="color:#7c3aed;">vnskankanamge@gmail.com</a></p>
-  <p>
-    <a href="https://www.linkedin.com/in/sameera-kankanamge-16baaa93/" target="_blank" style="color:#7c3aed;">LinkedIn Profile</a>
-  </p>
+  <p><a href="https://www.linkedin.com/in/sameera-kankanamge-16baaa93/" target="_blank" style="color:#7c3aed;">LinkedIn Profile</a></p>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <p>© 2026 Sameera Kankanamge</p>
 </footer>
+
+<!-- Contact Form Modal -->
+<div id="contact-form">
+  <div>
+    <h2>Contact Me</h2>
+    <form id="contactMeForm">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+      <button type="button" id="closeForm">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+emailjs.init("YOUR_EMAILJS_USER_ID"); // Replace with your EmailJS user ID
+
+const letsTalkBtn = document.getElementById("letsTalkBtn");
+const contactFormDiv = document.getElementById("contact-form");
+const closeFormBtn = document.getElementById("closeForm");
+const form = document.getElementById("contactMeForm");
+
+// Open form when button clicked
+letsTalkBtn.addEventListener("click", () => {
+  contactFormDiv.style.display = "flex";
+});
+
+// Close form
+closeFormBtn.addEventListener("click", () => {
+  contactFormDiv.style.display = "none";
+});
+
+// Send email on form submit
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  emailjs.sendForm("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID", this)
+    .then(function(){
+      alert("Message sent successfully!");
+      contactFormDiv.style.display = "none";
+      form.reset();
+    }, function(error){
+      alert("Error sending message: " + error.text);
+    });
+});
+</script>
 
 </body>
 </html>
