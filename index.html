@@ -114,7 +114,51 @@ footer {
 }
 </style>
 </head>
+<!-- Contact Form Modal -->
+<div id="contact-form" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:2000;">
+  <div style="background:#1e293b; padding:30px; border-radius:10px; max-width:400px; width:90%;">
+    <h2 style="color:#7c3aed; text-align:center;">Contact Me</h2>
+    <form id="contactMeForm">
+      <input type="text" name="name" placeholder="Your Name" required style="width:100%; padding:10px; margin:10px 0; border-radius:5px; border:none;">
+      <input type="email" name="email" placeholder="Your Email" required style="width:100%; padding:10px; margin:10px 0; border-radius:5px; border:none;">
+      <textarea name="message" placeholder="Your Message" required style="width:100%; padding:10px; margin:10px 0; border-radius:5px; border:none;"></textarea>
+      <button type="submit" style="padding:10px 20px; background:#7c3aed; color:white; border:none; border-radius:5px; cursor:pointer;">Send</button>
+      <button type="button" id="closeForm" style="padding:10px 20px; margin-left:10px; background:#333; color:white; border:none; border-radius:5px; cursor:pointer;">Cancel</button>
+    </form>
+  </div>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  emailjs.init("YOUR_EMAILJS_USER_ID"); // Replace with your EmailJS user ID
 
+  const letsTalkBtn = document.getElementById("letsTalkBtn");
+  const contactFormDiv = document.getElementById("contact-form");
+  const closeFormBtn = document.getElementById("closeForm");
+  const form = document.getElementById("contactMeForm");
+
+  // Open form when button clicked
+  letsTalkBtn.addEventListener("click", () => {
+    contactFormDiv.style.display = "flex";
+  });
+
+  // Close form
+  closeFormBtn.addEventListener("click", () => {
+    contactFormDiv.style.display = "none";
+  });
+
+  // Send email on form submit
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    emailjs.sendForm("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID", this)
+      .then(function(){
+        alert("Message sent successfully!");
+        contactFormDiv.style.display = "none";
+        form.reset();
+      }, function(error){
+        alert("Error sending message: " + error.text);
+      });
+  });
+</script>
 <body>
 
 <!-- NAVBAR -->
@@ -138,7 +182,7 @@ footer {
   <p>I am a sustainability professional interested in energy, environment, and digital solutions.</p>
 
   <a href="#projects" class="btn btn-primary">View My Work</a>
-  <a href="https://www.linkedin.com/in/sameera-kankanamge-16baaa93/" target="_blank" class="btn btn-outline">Let's Talk</a>
+ <a href="javascript:void(0)" id="letsTalkBtn" class="btn btn-outline">Let's Talk</a>
   <a href="cv.pdf" class="btn btn-outline">Download CV</a>
 
   <!-- Scroll Down Button -->
